@@ -2,7 +2,7 @@
 export const unitLabels: Record<string, string> = {
   kg: "প্রতি কেজি",
   gram: "প্রতি গ্রাম",
-  liter: "প্রতি লিটার",
+  litre: "প্রতি লিটার",
   ml: "প্রতি মিলিলিটার",
   piece: "প্রতি পিস",
   dozen: "প্রতি ডজন",
@@ -16,7 +16,7 @@ export const unitLabels: Record<string, string> = {
 export const unitTypes: Record<string, string> = {
   kg: "কেজি",
   gram: "গ্রাম",
-  liter: "লিটার",
+  litre: "লিটার",
   ml: "মিলিলিটার",
   piece: "পিস",
   dozen: "ডজন",

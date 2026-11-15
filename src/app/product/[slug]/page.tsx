@@ -3,8 +3,7 @@ import Link from "next/link";
 import { Card, Chip } from "@heroui/react";
 import { Home, ChevronRight, CheckCircle2 } from "lucide-react";
 import { IProduct } from "@/types/type";
-import { unitTypes } from "@/lib/utils";
-import { unitLabels } from "@/lib/utils";
+import { unitTypes, unitLabels } from "@/lib/utils";
 
 const ProductDetailsPage = async ({
   params,
@@ -104,8 +103,8 @@ const ProductDetailsPage = async ({
                   {product.nameBn}
                 </Card.Title>
                 <div className="text-sm text-slate-500">
-                  {unitLabels[product.unit] ?? product.unit} .
-                  {product.categoryNameBn}
+                  {unitLabels[product.unit.toLocaleLowerCase()] ?? product.unit}{" "}
+                  .{product.categoryNameBn}
                 </div>
 
                 <p className="text-slate-500">
@@ -197,7 +196,7 @@ const ProductDetailsPage = async ({
                 {avgPrice.toLocaleString("bn-BD")}
                 <span className="text-sm font-normal"> টাকা</span>
               </h1>
-              <p>প্রতি কেজি-এর হিসাবে</p>
+              <p>প্রতি {unitTypes[product.unit] ?? product.unit}-এর হিসাবে</p>
             </div>
           </div>
 
@@ -223,11 +222,21 @@ const ProductDetailsPage = async ({
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="border-y border-slate-100 text-xs font-bold text-slate-400">
-                      <th className="py-3 px-4 col-span-2">বাজার</th>
-                      <th className="py-3 px-4 col-span-2">বিভাগ</th>
-                      <th className="py-3 px-4 col-span-1">সর্বনিম্ন</th>
-                      <th className="py-3 px-4 col-span-1">সর্বাধিক</th>
-                      <th className="py-3 px-4 col-span-1">গড়</th>
+                      <th className="py-4 px-4 text-left font-semibold text-sm sm:text-base text-slate-700">
+                        বাজার
+                      </th>
+                      <th className="py-3 px-4 col-span-2 text-left font-semibold text-sm sm:text-base text-slate-500">
+                        বিভাগ
+                      </th>
+                      <th className="py-3 px-4 col-span-1 text-center font-semibold text-sm sm:text-base text-slate-500">
+                        সর্বনিম্ন
+                      </th>
+                      <th className="py-3 px-4 col-span-1 text-center font-semibold text-sm sm:text-base text-slate-500">
+                        সর্বাধিক
+                      </th>
+                      <th className="py-3 px-4 col-span-1 text-right font-semibold text-sm sm:text-base text-slate-500">
+                        গড়
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
@@ -236,8 +245,8 @@ const ProductDetailsPage = async ({
                         key={op.id}
                         className={idx === 0 ? "bg-emerald-50/40" : ""}
                       >
-                        <td className="py-4 px-4 font-bold text-slate-900 col-span-2">
-                          <div className="flex items-center gap-2">
+                        <td className="py-3 px-3 font-bold text-slate-600 col-span-2">
+                          <div className="flex items-center gap-2 text-left">
                             <span>{op.market}</span>
                             {idx === 0 && (
                               <Chip
@@ -249,19 +258,22 @@ const ProductDetailsPage = async ({
                             )}
                           </div>
                         </td>
-                        <td className="py-4 px-4 col-span-2">{op.division}</td>
+                        <td className="py-3 px-3 col-span-2 text-left">
+                          {op.division}
+                        </td>
 
-                        <td
-                          className={`py-4 px-4 text-left  text-sm sm:text-base "text-slate-500"
-                      }`}
-                        >
+                        <td className="py-3 px-3 text-center  text-sm sm:text-base text-slate-800">
                           {op.min.toLocaleString("bn-BD")} টাকা
                         </td>
-                        <td className="py-4 px-4 text-left text-sm sm:text-base text-slate-500">
+                        <td className="py-3 px-3 text-center text-sm sm:text-base text-slate-800">
                           {op.max.toLocaleString("bn-BD")} টাকা
                         </td>
-                        <td className="py-4 px-4 text-left font-extrabold text-sm sm:text-base text-slate-500">
-                          {op.avg.toLocaleString("bn-BD")} টাকা
+                        <td className="py-3 px-3 text-right font-medium text-sm sm:text-base text-slate-900">
+                          {op.avg.toLocaleString("bn-BD")}
+                          <span className="text-slate-800 font-semibold">
+                            {" "}
+                            টাকা
+                          </span>
                         </td>
                       </tr>
                     ))}
@@ -271,7 +283,7 @@ const ProductDetailsPage = async ({
             </Card>
           </div>
         </div>
-        <div className="p-6 mt-5 mb-8">
+        <div className="p-6 mt-3 mb-6">
           {product.image} সব {product.categoryNameBn}
         </div>
       </div>

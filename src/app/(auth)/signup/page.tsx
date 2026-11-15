@@ -120,7 +120,7 @@ export default function SignUpPage() {
             <TextField
               name="password"
               type={isVisible ? "text" : "password"}
-              minLength={6}
+              minLength={8}
               isRequired
               className="flex flex-col gap-1.5 w-full"
             >
