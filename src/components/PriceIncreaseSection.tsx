@@ -12,7 +12,9 @@ const PriceIncreaseSection = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
+          cache: "no-store",
+        });
         const data: IProduct[] = await res.json();
         const filteredData = data
           .filter((item) => item.change.dir === "up")

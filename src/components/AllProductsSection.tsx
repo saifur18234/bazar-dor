@@ -13,7 +13,9 @@ export default function AllProductsSection() {
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
+          cache: "no-store",
+        });
         if (!res.ok) throw new Error("Failed to fetch products");
         const data: IProduct[] = await res.json();
 
