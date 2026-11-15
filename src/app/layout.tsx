@@ -27,6 +27,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className=" min-h-full flex flex-col">
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: "#fff",
+              color: "#334155",
+              borderRadius: "12px",
+              fontSize: "14px",
+            },
+          }}
+        />
         <Navbar />
         <Marque />
         <main>{children}</main>
