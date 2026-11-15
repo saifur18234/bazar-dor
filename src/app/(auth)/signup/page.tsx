@@ -10,7 +10,6 @@ import {
   Label,
   Separator,
   TextField,
-  Toast,
 } from "@heroui/react";
 import { User, Mail, Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -43,7 +42,7 @@ export default function SignUpPage() {
     });
     console.log(resData, error);
     if (resData?.user.name) {
-      Toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে। চালিয়ে যেতে লগইন করুন");
+      toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে। চালিয়ে যেতে লগইন করুন");
       router.push("/signin");
     }
   };
