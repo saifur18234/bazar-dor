@@ -5,7 +5,7 @@ export interface ICategory {
   icon: string;
 }
 type category = {
-  
+        id: number;
         market: string;
         division: string;
         min: number;
@@ -29,5 +29,5 @@ export interface IProduct {
       dir: 'up' | 'down' | 'flat';
       pct: number;
     },
-    "markets":category[]; 
+    markets:category[]; 
 }
