@@ -5,7 +5,6 @@ import {
   Avatar,
   Button,
   Dropdown,
-  Label,
   ProgressCircle,
   Separator,
 } from "@heroui/react";
@@ -14,6 +13,7 @@ import Image from "next/image";
 import { signOut, useSession } from "@/lib/auth-client";
 import { usePathname } from "next/navigation";
 import { ICategory } from "@/types/type";
+import toast from "react-hot-toast";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -36,9 +36,20 @@ export default function Navbar() {
   }, []);
 
   const { data, isPending } = useSession();
+  // const handleSignOut = async () => {
+  //   await signOut();
+  // };
+
   const handleSignOut = async () => {
-    await signOut();
+    try {
+      await signOut();
+      toast.success("সফলভাবে সাইন আউট হয়েছে");
+    } catch (error) {
+      toast.error("সাইন আউট করা যায়নি");
+      console.error(error);
+    }
   };
+
   //   console.log(data);
   return (
     <header className="w-full bg-white border-b border-slate-200/80 sticky top-0 z-50">

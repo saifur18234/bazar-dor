@@ -18,6 +18,8 @@ import toast from "react-hot-toast";
 
 export default function SignInPage() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,13 +34,15 @@ export default function SignInPage() {
     if (error) {
       toast.error(error.message as string);
     }
-    console.log(resData);
+    // console.log(resData);
+    toast.success("সফলভাবে লগইন হয়েছে!");
   };
   const handleGoogleSignIn = async () => {
     const data = await signIn.social({
       provider: "google",
     });
-    console.log(data);
+    // console.log(data);
+    toast.success("সফলভাবে লগইন হয়েছে!");
   };
 
   return (

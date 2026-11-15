@@ -24,34 +24,52 @@ export default function SignUpPage() {
 
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setPasswordError("");
+    try {
+      setPasswordError("");
 
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
+      const formData = new FormData(e.currentTarget);
+      const data = Object.fromEntries(formData.entries());
 
-    if (data.password !== data.confirmPassword) {
-      setPasswordError("পাসওয়ার্ড দুটি মিলছে না!");
-      return;
-    }
+      if (data.password !== data.confirmPassword) {
+        setPasswordError("পাসওয়ার্ড দুটি মিলছে না!");
+        return;
+      }
 
-    console.log("Sign Up Data:", data);
-    const { data: resData, error } = await signUp.email({
-      email: data.email as string, // user email address
-      password: data.password as string, // user password -> min 8 characters by default
-      name: data.name as string, // user display name
-    });
-    console.log(resData, error);
-    if (resData?.user.name) {
-      toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে। চালিয়ে যেতে লগইন করুন");
-      router.push("/signin");
+      // console.log("Sign Up Data:", data);
+      const { data: resData, error } = await signUp.email({
+        email: data.email as string, // user email address
+        password: data.password as string, // user password -> min 8 characters by default
+        name: data.name as string, // user display name
+      });
+      if (error) {
+        toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি");
+        return;
+      }
+      // console.log(resData, error);
+      if (resData?.user.name) {
+        toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে। চালিয়ে যেতে লগইন করুন");
+        router.push("/signin");
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      toast.error("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
     }
   };
 
   const handleGoogleSignIn = async () => {
-    const data = await signIn.social({
-      provider: "google",
-    });
-    console.log(data);
+    try {
+      const { error } = await signIn.social({
+        provider: "google",
+        callbackURL: "/",
+      });
+
+      if (error) {
+        toast.error(error.message || "Google Sign Up ব্যর্থ হয়েছে");
+      }
+    } catch (error) {
+      console.error("Google Sign Up Error:", error);
+      toast.error("Google দিয়ে সাইন আপ করা যায়নি");
+    }
   };
 
   return (
@@ -133,7 +151,7 @@ export default function SignUpPage() {
                   className="pointer-events-none absolute left-3.5 text-slate-400"
                 />
                 <Input
-                  placeholder="কমপক্ষে ৬টি অক্ষর"
+                  placeholder="কমপক্ষে ৮টি অক্ষর"
                   className="w-full h-11 pl-10 pr-10 rounded-xl bg-slate-50/70 border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 hover:border-slate-300 focus:border-[#0d6efd] focus:bg-white focus:outline-none transition-colors"
                 />
                 <button
