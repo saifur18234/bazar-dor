@@ -33,17 +33,6 @@ export default function NotFound() {
           হোম পেজে ফিরে যান
         </Link>
 
-        {/* Back Button */}
-        <div className="mt-5">
-          <button
-            onClick={() => window.history.back()}
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors"
-          >
-            <ArrowLeft size={16} />
-            আগের পেজে ফিরে যান
-          </button>
-        </div>
-
         {/* Branding */}
         <p className="mt-12 text-xs text-slate-400">
           বাজার দর — প্রয়োজনীয় পণ্যের দাম এক নজরে।
