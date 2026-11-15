@@ -44,7 +44,7 @@ export default function PriceDecreaseSection() {
             {/* Main Title */}
             <h2 className="text-xm sm:text-xl font-extrabold text-slate-900 flex items-center gap-2">
               <span className="text-[#10b981] text-xl sm:text-2xl">▼</span>
-              <span>আজ ভাড়া কমেছে</span>
+              <span>আজ দাম কমেছে</span>
             </h2>
           </div>
         </div>
