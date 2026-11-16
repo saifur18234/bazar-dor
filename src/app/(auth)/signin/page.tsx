@@ -29,7 +29,7 @@ export default function SignInPage() {
     const { data: resData, error } = await signIn.email({
       email: data.email as string, // required, The email address of the user.
       password: data.password as string, // required, The password of the user. It should be at least 8 characters long and max 128 by default.
-      callbackURL: "/", // An optional URL to redirect to after the user signs in. (optional)
+      // callbackURL: "/", // An optional URL to redirect to after the user signs in. (optional)
     });
     if (error) {
       toast.error(error.message as string);
