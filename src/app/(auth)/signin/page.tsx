@@ -36,6 +36,10 @@ export default function SignInPage() {
     }
     // console.log(resData);
     toast.success("সফলভাবে লগইন হয়েছে!");
+
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 500);
   };
   const handleGoogleSignIn = async () => {
     const data = await signIn.social({
